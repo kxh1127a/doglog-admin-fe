@@ -20,11 +20,14 @@ a {
   color: inherit;
 }
 
+ul, ol {
+  list-style: none;
+}
 
 
 .layout-container {
   position: relative;
-  padding-left: 370px;
+  padding-left: 330px;
   padding-top: 75px;
   padding-right: 50px;
 }

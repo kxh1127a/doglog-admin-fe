@@ -2,9 +2,12 @@ import React from 'react';
 import styles from '@/styles/Nav.module.scss'
 import Link from "next/link";
 import { FaHome } from "react-icons/fa";
+import { FaCalendarAlt } from "react-icons/fa";
 import { FaUserAlt } from "react-icons/fa";
 import { MdOutlinePets } from "react-icons/md";
-
+import { MdOutlineArticle } from "react-icons/md";
+import { FaBell } from "react-icons/fa";
+import { IoChatboxEllipses } from "react-icons/io5";
 
 const Nav = () => {
     return (
@@ -28,27 +31,33 @@ const Nav = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link href="/caretip" className={styles.menu}>
-                        <FaLightbulb />
-                        <span>Care Tip</span>
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/place" className={styles.menu}>
-                        <FaMapMarkedAlt />
-                        <span>Place</span>
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/petcard" className={styles.menu}>
+                    <Link href="/pet" className={styles.menu}>
                         <MdOutlinePets />
-                        <span>Pet Card</span>
+                        <span>Pet</span>
+                    </Link>
+                </li>
+                <li>
+                    <Link href="/calendar" className={styles.menu}>
+                        <FaCalendarAlt />
+                        <span>Calendar</span>
+                    </Link>
+                </li>
+                <li>
+                    <Link href="/content" className={styles.menu}>
+                        <MdOutlineArticle />
+                        <span>Content</span>
+                    </Link>
+                </li>
+                <li>
+                    <Link href="/notice" className={styles.menu}>
+                        <FaBell />
+                        <span>Notice</span>
                     </Link>
                 </li>
                 <li>
                     <Link href="/chart" className={styles.menu}>
-                        <FaChartLine />
-                        <span>Chart</span>
+                        <IoChatboxEllipses />
+                        <span>QnA</span>
                     </Link>
                 </li>
             </ul>
