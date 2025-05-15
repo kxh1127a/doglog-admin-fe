@@ -3,4 +3,12 @@
   left: 0;
   top: 0;
   width: 370px;
+  padding-top: 100px;
+  padding-right: 20px;
+  .logo {
+    text-align: center;
+    img {
+      width: 220px;
+    }
+  }
 }

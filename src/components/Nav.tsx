@@ -4,7 +4,11 @@ import styles from '@/styles/Nav.module.scss'
 const Nav = () => {
     return (
         <div className={styles.nav}>
-            navBar
+            <h1 className={styles.logo}>
+                <Link href="/">
+                    <img src="/logo.png" alt="doglog logo"/>
+                </Link>
+            </h1>
         </div>
     );
 };
