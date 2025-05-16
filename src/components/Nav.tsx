@@ -8,6 +8,7 @@ import { MdOutlinePets } from "react-icons/md";
 import { MdOutlineArticle } from "react-icons/md";
 import { FaBell } from "react-icons/fa";
 import { IoChatboxEllipses } from "react-icons/io5";
+import { HiBars3 } from "react-icons/hi2";
 
 const Nav = () => {
     return (
@@ -61,6 +62,10 @@ const Nav = () => {
                     </Link>
                 </li>
             </ul>
+
+            <div className={styles.menubar}>
+                <HiBars3 />
+            </div>
         </div>
     );
 };

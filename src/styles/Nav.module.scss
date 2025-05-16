@@ -9,15 +9,16 @@
   padding-top: 100px;
   color: $color-point;
   @include mini_desktop {
-    position: static;
+    position: relative;
     width: 100%;
     padding-top: 0;
-    padding-bottom: 30px;
+    margin-bottom: 30px;
   }
   .logo {
     text-align: center;
     img {
       width: 220px;
+      max-width: 40vw;
     }
   }
   .menulist {
@@ -47,5 +48,16 @@
       display: none;
     }
   }
-
+  .menubar {
+    display: none;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $color-point;
+    font-size: 50px;
+    @include mini_desktop {
+      display: block;
+    }
+  }
 }
