@@ -1,4 +1,5 @@
 @import '@/styles/variables';
+@import '@/styles/mixins';
 
 .nav {
   position: fixed;
@@ -7,6 +8,12 @@
   width: 330px;
   padding-top: 100px;
   color: $color-point;
+  @include mini_desktop {
+    position: static;
+    width: 100%;
+    padding-top: 0;
+    padding-bottom: 30px;
+  }
   .logo {
     text-align: center;
     img {
@@ -35,6 +42,9 @@
           color: $color-point;
         }
       }
+    }
+    @include mini_desktop {
+      display: none;
     }
   }
 
