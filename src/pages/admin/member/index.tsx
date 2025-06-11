@@ -25,7 +25,7 @@ type User = {
     isEnabled: boolean;
 };
 
-const Member = () => {
+const Index = () => {
 
     const [users, setUsers] = useState<User[]>([]);
     const [page, setPage] = useState(0);
@@ -44,7 +44,7 @@ const Member = () => {
 
     const router = useRouter();
     const handleClick = (userId: number) => {
-        router.push(`/admin/members/${userId}`);
+        router.push(`/admin/member/details/${userId}`);
     };
 
 
@@ -258,4 +258,4 @@ const Member = () => {
         ;
 };
 
-export default Member;
+export default Index;

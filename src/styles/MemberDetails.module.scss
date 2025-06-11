@@ -1,0 +1,174 @@
+@import '@/styles/variables';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Pretendard', sans-serif;
+
+  .header {
+    display: flex;
+    justify-content: left;
+    align-items: start;
+    flex-wrap: wrap;
+    margin-left: $space-xl;
+    gap: 100px;
+
+    .backward {
+      &>* {
+        font-size: $font-size-xl;
+        color: $color-text;
+        cursor: pointer;
+      }
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background-color: #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      color: #666;
+    }
+
+    .userInfoLeft {
+      display: flex;
+      align-items: center;
+
+      .textInfo {
+        display: flex;
+        flex-direction: column;
+        gap: $space-xl;
+
+        .row {
+          display: flex;
+          gap: $space-xl;
+          align-items: center;
+
+          span {
+            font-size: $font-size-lg;
+            color: $color-text;
+            font-weight: 700;
+            letter-spacing: $space-xxs;
+
+            &.label {
+              font-weight: 400;
+              color: $color-text-secondary;
+              font-size: $font-size-md;
+            }
+          }
+        }
+      }
+    }
+
+    .userInfoRight {
+      display: flex;
+      font-size: 15px;
+      align-items: center;
+
+      .textInfo {
+        display: flex;
+        flex-direction: column;
+        gap: $space-xl;
+
+        .row {
+          display: flex;
+          gap: $space-xl;
+          align-items: center;
+          letter-spacing: $space-xxs;
+
+          span {
+            font-size: $font-size-lg;
+            color: $color-text;
+            font-weight: 700;
+
+            &.label {
+              font-weight: 400;
+              color: $color-text-secondary;
+              font-size: $font-size-md;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .petTable {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    overflow-x: auto;
+    //cursor: pointer;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+
+      th,
+      td {
+        text-align: center;
+        padding: 12px;
+        border-bottom: 1px solid #e0e0e0;
+      }
+
+      th {
+        background-color: #f1f1f1;
+        font-weight: 600;
+      }
+
+      td {
+        color: #444;
+      }
+
+      //tr:hover {
+      //  background-color: #f9f9f9;
+      //}
+
+
+    }
+  }
+
+  .contentStats {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+
+    .box {
+      flex: 1;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+      .label {
+        font-size: 14px;
+        color: #888;
+        margin-bottom: 6px;
+      }
+
+      .value {
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+      }
+    }
+  }
+}
+
+.petImg {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: $color-point;
+
+  margin: 0 auto;
+}
