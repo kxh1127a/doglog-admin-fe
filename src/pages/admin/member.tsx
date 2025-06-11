@@ -204,7 +204,8 @@ const Member = () => {
                             {
                                 users.map((user, index: number) => (
                                     <div key={index}
-                                         className={`${styles.user_row} ${!user.isEnabled ? styles.user_row_disabled : ''}`}>
+                                         className={`${styles.user_row} ${!user.isEnabled ? styles.user_row_disabled : ''}`}
+                                         onClick={() => {handleClick(user)}}>
                                         <div className={styles.user_info}>
                                             {/*<img className={`${styles.profile_icon}`}*/}
                                             {/*     style={{backgroundImage: `url(http://localhost:8089/${user.petProfileImageUrl})`}}/>*/}
