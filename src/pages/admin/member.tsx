@@ -8,9 +8,10 @@ import {TiArrowSortedUp} from "react-icons/ti";
 import {FaUserCircle} from "react-icons/fa";
 import {FaUserSlash} from "react-icons/fa";
 import {MdAdminPanelSettings} from "react-icons/md";
-import { useNavigate } from 'react-router-dom';
+import {useRouter} from "next/router";
 
 type User = {
+    id: number;
     memberRole: string;
     name: string;
     userName: string;
@@ -22,7 +23,6 @@ type User = {
     createdAt: string;
     lastLoginInfo: string;
     isEnabled: boolean;
-
 };
 
 const Member = () => {
@@ -42,9 +42,9 @@ const Member = () => {
     const [searchWord, setSearchWord] = useState("");
 
 
-    const navigate = useNavigate();
-    const handleClick = (userId) => {
-        navigate(`/users/${userId}`);
+    const router = useRouter();
+    const handleClick = (userId: number) => {
+        router.push(`/admin/members/${userId}`);
     };
 
 
@@ -57,8 +57,6 @@ const Member = () => {
         const res = await fetch(url);
         const data = await res.json();
         console.log(data.data);
-        // { "createdAt":"2025-05-15","email":"kxh1127a@gmail.com","isEnabled":true,"lastLoginInfo":"2 days ago","name":"허기범","petBirthDate":"2019-01-06",
-        //    "petName":"제로","petProfileImageUrl":"uploads/petProfile/pic1.png","phone":"010-8888-8888","userName":"kxh1127a" }
         return data;
     }
 
@@ -198,14 +196,11 @@ const Member = () => {
                         </div>
 
                         <div className={styles.user_body}>
-
-                            {/*{ "createdAt":"2025-05-15","email":"kxh1127a@gmail.com","isEnabled":true,"lastLoginInfo":"2 days ago","name":"허기범","petBirthDate":"2019-01-06",*/}
-                            {/*    "petName":"제로","petProfileImageUrl":"uploads/petProfile/pic1.png","phone":"010-8888-8888","userName":"kxh1127a" }*/}
                             {
                                 users.map((user, index: number) => (
-                                    <div key={index}
+                                    <div key={user.id}
                                          className={`${styles.user_row} ${!user.isEnabled ? styles.user_row_disabled : ''}`}
-                                         onClick={() => {handleClick(user)}}>
+                                         onClick={() => {handleClick(user.id)}}>
                                         <div className={styles.user_info}>
                                             {/*<img className={`${styles.profile_icon}`}*/}
                                             {/*     style={{backgroundImage: `url(http://localhost:8089/${user.petProfileImageUrl})`}}/>*/}
