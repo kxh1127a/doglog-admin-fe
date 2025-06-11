@@ -8,6 +8,7 @@ import {TiArrowSortedUp} from "react-icons/ti";
 import {FaUserCircle} from "react-icons/fa";
 import {FaUserSlash} from "react-icons/fa";
 import {MdAdminPanelSettings} from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
 
 type User = {
     memberRole: string;
@@ -39,6 +40,12 @@ const Member = () => {
     // member search
     const [searchOption, setSearchOption] = useState("name");
     const [searchWord, setSearchWord] = useState("");
+
+
+    const navigate = useNavigate();
+    const handleClick = (userId) => {
+        navigate(`/users/${userId}`);
+    };
 
 
     const fetchUsers = async (page: number, size: number, sortBy: string, direction: string, filter: string) => {
