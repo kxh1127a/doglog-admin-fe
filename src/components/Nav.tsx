@@ -25,7 +25,7 @@ const Nav = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link href="/member" className={styles.menu}>
+                    <Link href="/admin/member" className={styles.menu}>
                         <FaUserAlt />
                         <span>Member</span>
                     </Link>
