@@ -36,11 +36,13 @@
       justify-content: center;
       font-size: 40px;
       color: #666;
+      margin-top: $space-lg;
     }
 
     .userInfoLeft {
       display: flex;
       align-items: center;
+      margin: $space-lg 0;
 
       .textInfo {
         display: flex;
@@ -55,7 +57,7 @@
           span {
             font-size: $font-size-lg;
             color: $color-text;
-            font-weight: 700;
+            font-weight: 600;
             letter-spacing: $space-xxs;
 
             &.label {
@@ -72,6 +74,7 @@
       display: flex;
       font-size: 15px;
       align-items: center;
+      margin: $space-lg 0;
 
       .textInfo {
         display: flex;
@@ -87,7 +90,7 @@
           span {
             font-size: $font-size-lg;
             color: $color-text;
-            font-weight: 700;
+            font-weight: 600;
 
             &.label {
               font-weight: 400;
@@ -165,10 +168,10 @@
 }
 
 .petImg {
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  background-color: $color-point;
+  //background-color: $color-point;
 
   margin: 0 auto;
 }

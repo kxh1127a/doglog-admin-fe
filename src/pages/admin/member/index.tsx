@@ -9,21 +9,8 @@ import {FaUserCircle} from "react-icons/fa";
 import {FaUserSlash} from "react-icons/fa";
 import {MdAdminPanelSettings} from "react-icons/md";
 import {useRouter} from "next/router";
+import {User} from "@/types/memberType";
 
-type User = {
-    id: number;
-    memberRole: string;
-    name: string;
-    userName: string;
-    email: string;
-    phone: string;
-    petName: string;
-    petBirthDate: string;
-    petProfileImageUrl: string;
-    createdAt: string;
-    lastLoginInfo: string;
-    isEnabled: boolean;
-};
 
 const Index = () => {
 
