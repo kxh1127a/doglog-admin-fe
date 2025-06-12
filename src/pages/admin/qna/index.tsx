@@ -13,7 +13,7 @@ const inquiries = [
 ];
 
 const Index = () => {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState<Qna[]>([]);
     const [page, setPage] = useState(0);
     const [totalPages, setTotalPages] = useState(3);
     const [searchOption, setSearchOption] = useState("byTitle");
@@ -36,7 +36,7 @@ const Index = () => {
 
     useEffect(() => {
         const handler = setTimeout(() => {
-            fetchData(page, 10, status, orderDirection, searchOption, searchWord).then(data => {
+            fetchData(page, 15, status, orderDirection, searchOption, searchWord).then(data => {
                 setData(data.data.content);
                 setTotalPages(data.data.totalPages);
             });
@@ -47,7 +47,7 @@ const Index = () => {
             clearTimeout(handler);
         };
 
-    }, [])
+    }, [status, page, orderDirection, searchOption, searchWord]);
 
     return (
         <div className="main-container">
@@ -117,21 +117,21 @@ const Index = () => {
                         </tr>
                         </thead>
                         <tbody>
-                        {inquiries.map((item) => (
+                        {data.map((item) => (
                             <tr key={item.id}>
                                 <td>{item.id}</td>
-                                <td>{item.title}</td>
-                                <td>{item.user}</td>
-                                <td>{item.date}</td>
+                                <td>{item.askTitle}</td>
+                                <td>{item.memberName}</td>
+                                <td>{item.editDate}</td>
                                 <td>
                   <span
                       className={
-                          item.status === '답변완료'
+                          item.isAnswer
                               ? styles.statusCompleted
                               : styles.statusPending
                       }
                   >
-                    {item.status}
+                    {item.isAnswer? "답변완료" : "확인중"}
                   </span>
                                 </td>
                             </tr>

@@ -7,7 +7,7 @@
 }
 
 .upperBox {
-  max-width: 1300px;
+  max-width: 1400px;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -20,12 +20,12 @@
   background: white;
   border-radius: 20px;
   padding: 40px;
-  max-width: 1300px;
+  max-width: 1400px;
   margin: 0 auto;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-.title h4{
+.title h4 {
   font-size: $font-size-xl;
   font-weight: 600;
   margin-bottom: 30px;
@@ -36,6 +36,27 @@
   border-collapse: collapse;
   user-select: none;
   font-size: $font-size-md;
+  table-layout: fixed;
+
+  th:nth-child(1), td:nth-child(1) {
+    width: 60px;
+  }
+
+  th:nth-child(2), td:nth-child(2) {
+    width: 40%;
+  }
+
+  th:nth-child(3), td:nth-child(3) {
+    width: 20%;
+  }
+
+  th:nth-child(4), td:nth-child(4) {
+    width: 20%;
+  }
+
+  th:nth-child(5), td:nth-child(5) {
+    width: 100px;
+  }
 
   th {
     text-align: center;
@@ -51,11 +72,12 @@
     align-items: center;
     gap: $space-xs;
     font-size: $font-size-md;
-      &>* {
-        cursor: pointer;
-        //padding-top: $space-xs;
-        font-size: $font-size-lg;
-      }
+
+    & > * {
+      cursor: pointer;
+      //padding-top: $space-xs;
+      font-size: $font-size-lg;
+    }
   }
 
   .statusIcon {
@@ -68,10 +90,12 @@
     .statusDone {
       color: $color-primary;
     }
+
     .statusChecking {
       color: $color-point;
     }
-    &>* {
+
+    & > * {
       cursor: pointer;
       //padding-top: $space-xs;
       font-size: $font-size-lg;
@@ -89,6 +113,7 @@
   tr:first-child td {
     border-top: 1px solid #ddd;
   }
+
   tr:last-child td {
     border-bottom: none;
 
@@ -112,8 +137,6 @@
   font-size: 14px;
   font-weight: 500;
 }
-
-
 
 
 /////////////////// 하단 페이징 버튼 container
@@ -150,9 +173,8 @@
     font-size: $font-size-md;
   }
 }
+
 /////////////////// 하단 페이징 버튼 container
-
-
 
 
 /////////////////// 검색 container
@@ -205,6 +227,7 @@
     letter-spacing: $space-xxs;
   }
 }
+
 /////////////////// 검색 container
 
 

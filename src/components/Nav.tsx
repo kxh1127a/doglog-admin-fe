@@ -56,7 +56,7 @@ const Nav = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link href="/chart" className={styles.menu}>
+                    <Link href="/admin/qna" className={styles.menu}>
                         <IoChatboxEllipses />
                         <span>QnA</span>
                     </Link>
