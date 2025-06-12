@@ -23,7 +23,7 @@ const Index = () => {
 
 
     const fetchData = async (page: number, size: number, status: string, orderDirection: string, searchOption: string, searchWord: string) => {
-        let url = `http://localhost:8089/qna/api?page=${page}&size=${size}&orderDirection=${orderDirection}`;
+        let url = `http://localhost:8089/qna/api?page=${page}&size=${size}&status=${status}&orderDirection=${orderDirection}`;
         if (searchWord != "") {
             url += `&${searchOption}=${searchWord}`;
         }
