@@ -1,9 +1,10 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '@/styles/MemberDetails.module.scss';
-import { FaUserCircle } from "react-icons/fa";
+import {FaUserCircle, FaUserSlash} from "react-icons/fa";
 import { RiArrowGoBackLine } from "react-icons/ri";
 import { MemberResponse } from '@/types/memberDetailsType';
+import {MdAdminPanelSettings} from "react-icons/md";
 
 export default function MemberDetailPage() {
     const router = useRouter();
@@ -24,7 +25,6 @@ export default function MemberDetailPage() {
             fetchUserDetails(userId).then(data => {
                 console.log(data);
                 setUserData(data);
-
             });
         }
     }, [userId]);
@@ -38,7 +38,14 @@ export default function MemberDetailPage() {
                     <RiArrowGoBackLine />
                 </div>
                 <div className={styles.avatar}>
-                    <FaUserCircle />
+                    {
+                        !userData.isEnabled ? <FaUserSlash className={styles.user_icon}/> :
+                            (
+                                userData.role === 'ADMIN' ?
+                                    <MdAdminPanelSettings className={styles.admin_icon}/> :
+                                    <FaUserCircle className={styles.user_icon}/>
+                            )
+                    }
                 </div>
                 <div className={styles.userInfoLeft}>
                     <div className={styles.textInfo}>

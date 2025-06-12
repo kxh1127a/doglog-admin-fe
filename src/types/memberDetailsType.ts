@@ -14,7 +14,10 @@ export interface MemberResponse {
     userName: string;
     email: string;
     phone: string;
-    createdAt: string; // LocalDateTime → ISO 형식 string
+    createdAt: string;
+    role: string;
+    isEnabled: boolean;
+
     pets: PetResponse[];
     countTipLike: number;
     countQuestion: number;

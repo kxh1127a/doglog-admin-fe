@@ -57,13 +57,13 @@
           span {
             font-size: $font-size-lg;
             color: $color-text;
-            font-weight: 600;
+            font-weight: 500;
             letter-spacing: $space-xxs;
 
             &.label {
               font-weight: 400;
               color: $color-text-secondary;
-              font-size: $font-size-md;
+              font-size: $font-size-sm;
             }
           }
         }
@@ -90,12 +90,12 @@
           span {
             font-size: $font-size-lg;
             color: $color-text;
-            font-weight: 600;
+            font-weight: 500;
 
             &.label {
               font-weight: 400;
               color: $color-text-secondary;
-              font-size: $font-size-md;
+              font-size: $font-size-sm;
             }
           }
         }
