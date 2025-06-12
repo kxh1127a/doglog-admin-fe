@@ -4,12 +4,12 @@ import {FaUserCircle} from "react-icons/fa";
 import {FaUserSlash} from "react-icons/fa";
 import {MdAdminPanelSettings} from "react-icons/md";
 import {useRouter} from "next/router";
-import {User} from "@/types/memberType";
+import {Pet} from "@/types/petType";
 
 
 const Index = () => {
 
-    const [users, setUsers] = useState<User[]>([]);
+    const [users, setUsers] = useState<Pet[]>([]);
     const [page, setPage] = useState(0);
     const [totalPages, setTotalPages] = useState(1);
     const [countResults, setCountResults] = useState(0);
@@ -24,15 +24,13 @@ const Index = () => {
     const [searchOption, setSearchOption] = useState("name");
     const [searchWord, setSearchWord] = useState("");
 
-
     const router = useRouter();
     const handleClick = (userId: number) => {
         router.push(`/admin/member/details/${userId}`);
     };
 
-
-    const fetchUsers = async (page: number, size: number, sortBy: string, direction: string, filter: string) => {
-        const url = `http://localhost:8089/member/api?page=${page}&size=${size}&sortBy=${sortBy}&direction=${direction}&filter=${filter}`;
+    const fetchUsers = async (page: number, size: number) => {
+        const url = `http://localhost:8089/pet/all?page=${page}&size=${size}`;
         console.log(url);
         const res = await fetch(url);
         const data = await res.json();
@@ -52,7 +50,7 @@ const Index = () => {
     useEffect(() => {
         const handler = setTimeout(() => {
             if (searchWord.trim() === "") {
-                fetchUsers(page, 10, sortBy, sortDirection, filter).then(data => {
+                fetchUsers(page, 10).then(data => {
                     setUsers(data.data.content);
                     setTotalPages(data.data.totalPages);
                     setCountResults(data.data.totalElements);
@@ -128,24 +126,24 @@ const Index = () => {
 
                         <div className={styles.user_body}>
                             {
-                                users.map((user, index: number) => (
-                                    <div key={user.id}
-                                         className={`${styles.user_row} ${!user.isEnabled ? styles.user_row_disabled : ''}`}
-                                         onClick={() => {handleClick(user.id)}}>
+                                users.map((pet, index: number) => (
+                                    <div key={pet.id}
+                                         className={`${styles.user_row} ${!pet.isEnabled ? styles.user_row_disabled : ''}`}
+                                         onClick={() => {handleClick(pet.id)}}>
                                         <div className={styles.user_info}>
                                             <img className={`${styles.profile_icon}`}
-                                                 style={{backgroundImage: `url(http://localhost:8089/${user.petProfileImageUrl})`}}/>
+                                                 style={{backgroundImage: `url(http://localhost:8089/${pet.petProfileImageUrl})`}}/>
 
                                             <div>
-                                                <div><strong>{user.name}</strong></div>
-                                                <div className={styles.email}>{user.userName}</div>
+                                                <div><strong>{pet.name}</strong></div>
+                                                <div className={styles.email}>{pet.userName}</div>
                                             </div>
                                         </div>
-                                        <div>{user.phone}</div>
-                                        <div>{user.petName} ({user.petBirthDate})</div>
-                                        <div>{user.createdAt}</div>
-                                        <div>{user.lastLoginInfo}</div>
-                                        <div>{user.phone}</div>
+                                        <div>{pet.name}</div>
+                                        <div>{pet.petName} ({pet.petBirthDate})</div>
+                                        <div>{pet.createdAt}</div>
+                                        <div>{pet.lastLoginInfo}</div>
+                                        <div>{pet.phone}</div>
                                     </div>
                                 ))
                             }
