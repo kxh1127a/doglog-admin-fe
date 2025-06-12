@@ -9,6 +9,11 @@
 .upperBox {
   max-width: 1300px;
   margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+
 }
 
 .box {
@@ -20,8 +25,8 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-.title {
-  font-size: 24px;
+.title h4{
+  font-size: $font-size-xl;
   font-weight: 600;
   margin-bottom: 30px;
 }
@@ -29,13 +34,48 @@
 .table {
   width: 100%;
   border-collapse: collapse;
+  user-select: none;
+  font-size: $font-size-md;
 
   th {
     text-align: center;
     padding: 12px;
     font-weight: 600;
     color: #333;
-    border-bottom: 1px solid #ddd;
+    //border-bottom: 1px solid #ddd;
+  }
+
+  .orderIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: $space-xs;
+    font-size: $font-size-md;
+      &>* {
+        cursor: pointer;
+        //padding-top: $space-xs;
+        font-size: $font-size-lg;
+      }
+  }
+
+  .statusIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: $space-xs;
+    font-size: $font-size-md;
+
+    .statusDone {
+      color: $color-primary;
+    }
+    .statusChecking {
+      color: $color-point;
+    }
+    &>* {
+      cursor: pointer;
+      //padding-top: $space-xs;
+      font-size: $font-size-lg;
+    }
   }
 
   td {
@@ -43,8 +83,12 @@
     border-bottom: 1px solid #eee;
     color: #555;
     text-align: center;
+    cursor: pointer;
   }
 
+  tr:first-child td {
+    border-top: 1px solid #ddd;
+  }
   tr:last-child td {
     border-bottom: none;
 
@@ -52,7 +96,7 @@
 }
 
 .statusCompleted {
-  background-color: #2e384d;
+  background-color: $color-primary;
   color: white;
   padding: 6px 12px;
   border-radius: 999px;
@@ -61,10 +105,110 @@
 }
 
 .statusPending {
-  background-color: #f0f0f5;
-  color: #555;
+  background-color: $color-point;
+  color: white;
   padding: 6px 12px;
   border-radius: 999px;
   font-size: 14px;
   font-weight: 500;
 }
+
+
+
+
+/////////////////// 하단 페이징 버튼 container
+.paging_button_container {
+  margin-top: $space-xl;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: $space-md;
+
+  button {
+    background-color: $color-white;
+    border: none;
+    padding: $space-sm;
+    color: $color-text;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    font-size: $font-size-sm;
+    opacity: 0.7;
+    transition: 0.3s;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .active_page {
+    background-color: $color-primary;
+    color: $color-white;
+    opacity: 1;
+  }
+
+  span:last-child {
+    font-size: $font-size-md;
+  }
+}
+/////////////////// 하단 페이징 버튼 container
+
+
+
+
+/////////////////// 검색 container
+.search_container {
+  width: 50%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: $space-sm;
+
+  &:focus {
+    border-color: #098c23;
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 94, 94, 0.5);
+  }
+
+  .select_box {
+    position: relative;
+
+    select {
+      height: 40px;
+      width: 100px;
+      padding: 10px;
+      font-size: $font-size-sm;
+      border-radius: $radius-md;
+      border: 1px solid $color-gray;
+      background-color: white;
+      color: #333;
+
+      option {
+        padding: 10px;
+      }
+    }
+
+  }
+
+  input {
+    height: 40px;
+    flex: 0.5;
+    padding: 0 $space-md;
+    font-size: $font-size-sm;
+    border-radius: $radius-md;
+    border: 1px solid $color-gray;
+
+  }
+
+  .resultBox {
+    color: $color-text;
+    letter-spacing: $space-xxs;
+  }
+}
+/////////////////// 검색 container
+
+
+.orderBtn {
+
+}
+
