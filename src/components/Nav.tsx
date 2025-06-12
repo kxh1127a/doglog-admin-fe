@@ -26,13 +26,13 @@ const Nav = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link href="/admin" className={styles.menu}>
+                    <Link href="/admin/member" className={styles.menu}>
                         <FaUserAlt />
                         <span>Member</span>
                     </Link>
                 </li>
                 <li>
-                    <Link href="/pet" className={styles.menu}>
+                    <Link href="/admin/pet" className={styles.menu}>
                         <MdOutlinePets />
                         <span>Pet</span>
                     </Link>
