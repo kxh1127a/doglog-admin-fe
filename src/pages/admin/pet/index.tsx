@@ -29,7 +29,7 @@ const Index = () => {
         router.push(`/admin/member/details/${userId}`);
     };
 
-    const fetchUsers = async (page: number, size: number) => {
+    const fetchPets = async (page: number, size: number) => {
         const url = `http://localhost:8089/pet/all?page=${page}&size=${size}`;
         console.log(url);
         const res = await fetch(url);
@@ -38,8 +38,8 @@ const Index = () => {
         return data;
     }
 
-    const searchUsers = async (page: number, size: number, option: string, word: string, sortBy: string, direction: string, filter: string) => {
-        const searchUrl = `http://localhost:8089/member/search?${option}=${word}&page=${page}&size=${size}&sortBy=${sortBy}&direction=${direction}&filter=${filter}`;
+    const searchPets = async (page: number, size: number, option: string, word: string) => {
+        const searchUrl = `http://localhost:8089/pet/search?${option}=${word}&page=${page}&size=${size}&`;
         console.log(searchUrl);
         const res = await fetch(searchUrl);
         const data = await res.json();
@@ -50,13 +50,13 @@ const Index = () => {
     useEffect(() => {
         const handler = setTimeout(() => {
             if (searchWord.trim() === "") {
-                fetchUsers(page, 8).then(data => {
+                fetchPets(page, 8).then(data => {
                     setUsers(data.data.content);
                     setTotalPages(data.data.totalPages);
                     setCountResults(data.data.totalElements);
                 });
             } else {
-                searchUsers(page, 8, searchOption, searchWord, sortBy, sortDirection, filter).then(data => {
+                searchPets(page, 8, searchOption, searchWord).then(data => {
                     console.log(searchWord);
                     setUsers(data.data.content);
                     setTotalPages(data.data.totalPages);
@@ -68,7 +68,7 @@ const Index = () => {
         return () => {
             clearTimeout(handler);
         };
-    }, [searchWord, searchOption, page, sortBy, sortDirection, filter]);
+    }, [searchWord, searchOption, page]);
 
 
     return (
@@ -76,30 +76,11 @@ const Index = () => {
 
             <article className={styles.article_container}>
                 <section className={styles.upper_section}>
-
-                    {/*sorting button*/}
-                    {/*<div className={styles.user_status_btn_container}>*/}
-                    {/*    <button className={filter == "all" ? styles.active_status : ''} onClick={() => {*/}
-                    {/*        setFilter("all");*/}
-                    {/*        setPage(0);*/}
-                    {/*    }}><MdFace/> 전체회원*/}
-                    {/*    </button>*/}
-                    {/*    <button className={filter == "normal" ? styles.active_status : ''} onClick={() => {*/}
-                    {/*        setFilter("normal");*/}
-                    {/*        setPage(0);*/}
-                    {/*    }}><MdOutlineFaceRetouchingNatural/> 활동회원*/}
-                    {/*    </button>*/}
-                    {/*    <button className={filter == "withdrawn" ? styles.active_status : ''} onClick={() => {*/}
-                    {/*        setFilter("withdrawn");*/}
-                    {/*        setPage(0);*/}
-                    {/*    }}><MdOutlineFaceRetouchingOff/> 탈퇴회원*/}
-                    {/*    </button>*/}
-                    {/*</div>*/}
                     <div className={styles.search_container}>
                         <div className={styles.select_box}>
                             <select onChange={(e) => setSearchOption(e.target.value)}>
-                                <option value="">이름</option>
-                                <option value="">품종</option>
+                                <option value="byName">이름</option>
+                                <option value="byBreed">품종</option>
                             </select>
                         </div>
 
