@@ -184,7 +184,7 @@ const Index = () => {
 
                         <div className={styles.user_body}>
                             {
-                                users.map((user, index: number) => (
+                                users.map((user) => (
                                     <div key={user.id}
                                          className={`${styles.user_row} ${!user.isEnabled ? styles.user_row_disabled : ''}`}
                                          onClick={() => {handleClick(user.id)}}>

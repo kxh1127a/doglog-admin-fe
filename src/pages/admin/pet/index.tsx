@@ -50,13 +50,13 @@ const Index = () => {
     useEffect(() => {
         const handler = setTimeout(() => {
             if (searchWord.trim() === "") {
-                fetchUsers(page, 10).then(data => {
+                fetchUsers(page, 8).then(data => {
                     setUsers(data.data.content);
                     setTotalPages(data.data.totalPages);
                     setCountResults(data.data.totalElements);
                 });
             } else {
-                searchUsers(page, 10, searchOption, searchWord, sortBy, sortDirection, filter).then(data => {
+                searchUsers(page, 8, searchOption, searchWord, sortBy, sortDirection, filter).then(data => {
                     console.log(searchWord);
                     setUsers(data.data.content);
                     setTotalPages(data.data.totalPages);
@@ -126,24 +126,30 @@ const Index = () => {
 
                         <div className={styles.user_body}>
                             {
-                                users.map((pet, index: number) => (
+                                users.map((pet) => (
                                     <div key={pet.id}
-                                         className={`${styles.user_row} ${!pet.isEnabled ? styles.user_row_disabled : ''}`}
-                                         onClick={() => {handleClick(pet.id)}}>
+                                         className={`${styles.user_row}`}
+                                         onClick={() => {handleClick(pet.memberId)}}>
                                         <div className={styles.user_info}>
-                                            <img className={`${styles.profile_icon}`}
-                                                 style={{backgroundImage: `url(http://localhost:8089/${pet.petProfileImageUrl})`}}/>
+                                            <img
+                                                className={`${styles.profile_icon}`}
+                                                src={`http://localhost:8089/${pet.profileImageUrl}`}
+                                                onError={(e) => {
+                                                    e.currentTarget.src = 'http://localhost:8089/uploads/petProfile/pic-default.png';
+                                                }}
+                                                alt="반려견 프로필"
+                                            />
 
                                             <div>
                                                 <div><strong>{pet.name}</strong></div>
-                                                <div className={styles.email}>{pet.userName}</div>
+                                                <div className={styles.email}>{pet.memberUserName}</div>
                                             </div>
                                         </div>
-                                        <div>{pet.name}</div>
-                                        <div>{pet.petName} ({pet.petBirthDate})</div>
-                                        <div>{pet.createdAt}</div>
-                                        <div>{pet.lastLoginInfo}</div>
-                                        <div>{pet.phone}</div>
+                                        <div>{pet.birthDate}</div>
+                                        <div>{pet.petBreed}</div>
+                                        <div>{pet.weight} kg</div>
+                                        <div>{pet.gender}</div>
+                                        <div>{pet.registrationNumber}</div>
                                     </div>
                                 ))
                             }

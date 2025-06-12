@@ -34,7 +34,10 @@ export default function MemberDetailPage() {
     return (
         <div className={styles.container}>
             <div className={styles.header}>
-                <div className={styles.backward} onClick={() => router.push('/admin/member')}>
+                <div className={styles.backward} onClick={() => {
+                    // router.push('/admin/member');
+                    router.back();
+                }}>
                     <RiArrowGoBackLine />
                 </div>
                 <div className={styles.avatar}>
