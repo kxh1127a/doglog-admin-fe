@@ -7,7 +7,7 @@
 }
 
 .upperBox {
-  max-width: 1400px;
+  max-width: 1500px;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -20,7 +20,7 @@
   background: white;
   border-radius: 20px;
   padding: 40px;
-  max-width: 1400px;
+  max-width: 1500px;
   margin: 0 auto;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
@@ -124,18 +124,18 @@
   background-color: $color-primary;
   color: white;
   padding: 6px 12px;
-  border-radius: 999px;
+  border-radius: 5px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .statusPending {
   background-color: $color-point;
   color: white;
   padding: 6px 12px;
-  border-radius: 999px;
+  border-radius: 5px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 

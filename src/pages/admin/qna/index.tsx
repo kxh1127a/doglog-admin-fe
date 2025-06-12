@@ -6,12 +6,6 @@ import {GrStatusPlaceholder} from "react-icons/gr";
 import {GrStatusPlaceholderSmall} from "react-icons/gr";
 import {Qna} from "@/types/QnaType";
 
-const inquiries = [
-    {id: 1, title: '앱에서 반려견 등록이 안돼요', user: '허기범', date: '2025-02-01', status: '답변완료'},
-    {id: 2, title: '병원 정보가 잘못되어 있어요', user: '이건휘', date: '2025-02-02', status: '확인중'},
-    {id: 3, title: '앱 오류 문의', user: '윤혜경', date: '2025-02-04', status: '답변완료'},
-];
-
 const Index = () => {
     const [data, setData] = useState<Qna[]>([]);
     const [page, setPage] = useState(0);
@@ -21,6 +15,10 @@ const Index = () => {
     const [orderDirection, setOrderDirection] = useState("desc");
     const [status, setStatus] = useState("all");
 
+    const router = useRouter();
+    const handleClick = (id: number) => {
+        router.push(`/admin/qna/details/${id}`);
+    };
 
     const fetchData = async (page: number, size: number, status: string, orderDirection: string, searchOption: string, searchWord: string) => {
         let url = `http://localhost:8089/qna/api?page=${page}&size=${size}&status=${status}&orderDirection=${orderDirection}`;
@@ -118,7 +116,7 @@ const Index = () => {
                         </thead>
                         <tbody>
                         {data.map((item) => (
-                            <tr key={item.id}>
+                            <tr key={item.id} onClick={()=>{handleClick(item.id)}}>
                                 <td>{item.id}</td>
                                 <td>{item.askTitle}</td>
                                 <td>{item.memberName}</td>
