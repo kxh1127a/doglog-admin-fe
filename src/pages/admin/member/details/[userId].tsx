@@ -29,7 +29,7 @@ export default function MemberDetailPage() {
         }
     }, [userId]);
 
-    if (!userData) return <div>로딩 중...</div>;
+    if (!userData) return <div>Loading...</div>;
 
     return (
         <div className={styles.container}>
