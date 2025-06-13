@@ -15,9 +15,11 @@
   display: flex;
   justify-content: center;
 
-  //h1 {
-  //  padding-top: $space-md;
-  //}
+  h1 {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-light;
+    padding-top: $space-md;
+  }
 }
 .wrapper {
   width: 900px;
