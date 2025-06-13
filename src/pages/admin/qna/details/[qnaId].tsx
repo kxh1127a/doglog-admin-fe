@@ -48,7 +48,7 @@ const QnaDetailPage = () => {
     const fetchUserDetails = async (qnaId: string | string[] | undefined) => {
         if (!qnaId) return;
 
-        const url = `http://localhost:8089/member/details/${qnaId}`;
+        const url = `http://localhost:8089/qna/details/${qnaId}`;
         const res = await fetch(url);
         const result = await res.json();
         return result.data;
