@@ -1,4 +1,4 @@
-@import '@/styles/variables';
+@use '@/styles/_variables' as *;
 
 .container {
   display: flex;
@@ -13,7 +13,7 @@
   .header {
     display: flex;
     justify-content: left;
-    align-items: start;
+    align-items: flex-start;
     flex-wrap: wrap;
     margin-left: $space-xl;
     gap: 100px;

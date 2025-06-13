@@ -1,4 +1,4 @@
-@import '@/styles/variables';
+@use '@/styles/_variables' as *;
 
 div {
   nav {
@@ -43,7 +43,7 @@ div {
         //display: inline-block;
         width: 50%;
         display: flex;
-        justify-content: start;
+        justify-content: flex-start;
         align-items: center;
         gap: 15px;
 

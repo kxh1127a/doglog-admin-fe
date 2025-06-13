@@ -1,11 +1,15 @@
 import {useRouter} from 'next/router';
 import React, {useEffect, useState} from 'react';
 import styles from '@/styles/QnaDetails.module.scss';
-import {MemberResponse} from '@/types/memberDetailsType';
+import {RiArrowGoBackLine} from "react-icons/ri";
+// import {MemberResponse} from '@/types/memberDetailsType';
+import {FiEdit3} from "react-icons/fi"; // ✨ edit 아이콘
+import {FaSave} from "react-icons/fa"; // ✨ 저장 아이콘 (선택)
 
-export default function MemberDetailPage() {
+const QnaDetailPage = () => {
     const mockData = {
         title: '앱에서 반려견 등록이 안돼요',
+        writer: '허기범',
         date: '2025-05-15',
         content:
             '안녕하세요.\n새로운 반려견을 등록하려고 하는데, 사진 업로드 단계에서 계속 오류가 발생합니다.\n어떤 파일 형식이나 용량 제한이 있는지 알려주시면 감사하겠습니다.\n빠른 답변 부탁드립니다.',
@@ -26,12 +30,25 @@ export default function MemberDetailPage() {
 
     const router = useRouter();
     const {qnaId} = router.query;
-    const [data, setData] = useState<MemberResponse | null>(null);
+    // const [data, setData] = useState<MemberResponse | null>(null);
 
-    const fetchUserDetails = async (userId: string | string[] | undefined) => {
-        if (!userId) return;
+    const [isEditing, setIsEditing] = useState(false);
+    const [answerText, setAnswerText] = useState(mockData.answer);
+    const [savedAnswer, setSavedAnswer] = useState(mockData.answer);
 
-        const url = `http://localhost:8089/member/detail/${userId}`;
+    const handleRegisterClick = () => {
+        setSavedAnswer(answerText);
+        setIsEditing(false);
+
+        // 🔜 여기에 저장 API 연동 가능
+        // await fetch('/api/save-answer', { method: 'POST', body: JSON.stringify(answerText) });
+    };
+
+
+    const fetchUserDetails = async (qnaId: string | string[] | undefined) => {
+        if (!qnaId) return;
+
+        const url = `http://localhost:8089/member/details/${qnaId}`;
         const res = await fetch(url);
         const result = await res.json();
         return result.data;
@@ -43,24 +60,38 @@ export default function MemberDetailPage() {
         if (qnaId) {
             fetchUserDetails(qnaId).then(data => {
                 console.log(data);
-                setData(data);
+                // setData(data);
             });
         }
     }, [qnaId]);
 
-    if (!data) return <div>Loading...</div>;
+    // if (!data) return <div>Loading...</div>;
 
     return (
         <div className="main-container">
+            <div className={styles.backward} onClick={() => {
+                // router.push('/admin/member');
+                router.back();
+            }}>
+                <RiArrowGoBackLine/>
+            </div>
+
             <div className={styles.totalContainer}>
+
                 <div className={styles.totalTitle}>
+
                     <h1 className={styles.heading}>유저 1:1 문의 상세보기</h1>
                 </div>
-                <div className={styles.wrapper}>
 
+                <div className={styles.wrapper}>
                     <div className={styles.block}>
                         <div className={styles.label}>문의 제목</div>
                         <div className={styles.value}>{mockData.title}</div>
+                    </div>
+
+                    <div className={styles.block}>
+                        <div className={styles.label}>작성자</div>
+                        <div className={styles.value}>{mockData.writer}</div>
                     </div>
 
                     <div className={styles.block}>
@@ -74,8 +105,31 @@ export default function MemberDetailPage() {
                     </div>
 
                     <div className={styles.answerBox}>
-                        <div className={styles.answerTitle}>등록된 답변</div>
-                        <div className={styles.answerContent}>{mockData.answer}</div>
+                        <div className={styles.answerTitle}>
+                            등록된 답변
+                            {!isEditing && (
+                                <span className={styles.editIcon} onClick={() => setIsEditing(true)}>
+                                    <FiEdit3/>
+                                </span>
+                            )}
+                        </div>
+
+                        {isEditing ? (
+                            <>
+                                <textarea
+                                    className={styles.textarea}
+                                    value={answerText}
+                                    onChange={(e) => setAnswerText(e.target.value)}
+                                    rows={8}
+                                />
+                                <button className={styles.submitButton} onClick={handleRegisterClick}>
+                                    등록하기
+                                </button>
+                            </>
+                        ) : (
+                            <div className={styles.answerContent}>{savedAnswer}</div>
+                        )}
+
                         <div className={styles.answerDate}>{mockData.answerDate} 작성</div>
                     </div>
                 </div>
@@ -83,3 +137,5 @@ export default function MemberDetailPage() {
         </div>
     );
 }
+
+export default QnaDetailPage;

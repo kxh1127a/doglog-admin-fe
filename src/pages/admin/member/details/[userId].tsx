@@ -6,7 +6,7 @@ import {RiArrowGoBackLine} from "react-icons/ri";
 import {MemberResponse} from '@/types/memberDetailsType';
 import {MdAdminPanelSettings} from "react-icons/md";
 
-export default function MemberDetailPage() {
+const MemberDetailPage = () => {
     const router = useRouter();
     const {userId} = router.query;
     const [userData, setUserData] = useState<MemberResponse | null>(null);
@@ -130,3 +130,5 @@ export default function MemberDetailPage() {
         </div>
     );
 }
+
+export default MemberDetailPage;

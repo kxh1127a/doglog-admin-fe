@@ -1,19 +1,26 @@
-@import '@/styles/variables';
+@use '@/styles/_variables' as *;
 
 .totalContainer {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-
+.backward {
+  font-size: $font-size-xl;
+  padding: $space-xl $space-xl 0 $space-xxxl;
+}
 .totalTitle {
   display: flex;
   justify-content: center;
+
+  //h1 {
+  //  padding-top: $space-md;
+  //}
 }
 .wrapper {
-  max-width: 700px;
-  margin: 50px auto;
+  width: 900px;
+  margin: $space-sm auto;
   padding: 30px;
   background: #fff;
   border-radius: 12px;
@@ -54,16 +61,17 @@
 
 .answerBox {
   margin-top: 30px;
-  background: #f4f6fa;
+  background: #f3f3f3;
   border-radius: 12px;
-  padding: 20px;
-  border-left: 5px solid #8fb7f3;
+  padding: $space-xl;
+  border-left: 5px solid $color-point;
 }
 
 .answerTitle {
   font-weight: bold;
   font-size: 1.1rem;
   margin-bottom: 10px;
+  display: flex;
 }
 
 .answerContent {
@@ -77,4 +85,40 @@
   font-size: 0.85rem;
   color: #888;
   text-align: right;
+}
+
+
+.editIcon {
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  color: #666;
+  &:hover {
+    color: $color-point;
+  }
+}
+
+.textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-top: 10px;
+  resize: vertical;
+}
+
+.submitButton {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: $color-primary;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-secondary;
+  }
 }
