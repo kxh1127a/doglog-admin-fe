@@ -4,7 +4,7 @@ import {useRouter} from "next/router";
 import {TiArrowSortedDown, TiArrowSortedUp} from "react-icons/ti";
 import {GrStatusPlaceholder} from "react-icons/gr";
 import {GrStatusPlaceholderSmall} from "react-icons/gr";
-import {Qna} from "@/types/QnaType";
+import {Qna} from "@/types/qnaType";
 
 const Index = () => {
     const [data, setData] = useState<Qna[]>([]);

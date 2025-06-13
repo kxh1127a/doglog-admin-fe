@@ -9,6 +9,7 @@
 .backward {
   font-size: $font-size-xl;
   padding: $space-xl $space-xl 0 $space-xxxl;
+  cursor: pointer;
 }
 .totalTitle {
   display: flex;
@@ -66,7 +67,13 @@
   padding: $space-xl;
   border-left: 5px solid $color-point;
 }
-
+.answerBoxDone {
+  margin-top: 30px;
+  background: #f3f3f3;
+  border-radius: 12px;
+  padding: $space-xl;
+  border-left: 5px solid $color-primary;
+}
 .answerTitle {
   font-weight: bold;
   font-size: 1.1rem;
@@ -95,6 +102,16 @@
   color: #666;
   &:hover {
     color: $color-point;
+  }
+}
+
+.editIconDone {
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  color: #666;
+  &:hover {
+    color: $color-primary;
   }
 }
 
