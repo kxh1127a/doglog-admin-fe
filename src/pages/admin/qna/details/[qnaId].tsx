@@ -16,12 +16,36 @@ const QnaDetailPage = () => {
     const [answerText, setAnswerText] = useState("");
     const [savedAnswer, setSavedAnswer] = useState("");
 
-    const handleRegisterClick = () => {
+    const handleRegisterClick = async () => {
         setSavedAnswer(answerText);
         setIsEditing(false);
 
         // 🔜 여기에 저장 API 연동 가능
         // await fetch('/api/save-answer', { method: 'POST', body: JSON.stringify(answerText) });
+        try {
+            const res = await fetch('http://localhost:8089/qna/details/answer', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    questionId: qnaId,
+                    comment: answerText
+                })
+            });
+
+            if (!res.ok) throw new Error("등록 실패");
+
+            const result = await res.text(); // 또는 res.json()
+            console.log(result); // '답변이 등록되었습니다.'
+
+            setSavedAnswer(answerText);
+            setIsEditing(false);
+            alert("답변이 등록되었습니다!");
+        } catch (err) {
+            console.error(err);
+            alert("답변 등록에 실패했습니다.");
+        }
     };
 
 
