@@ -12,6 +12,7 @@
     "axios": "^1.9.0",
     "bcrypt": "^6.0.0",
     "cookie": "^1.0.2",
+    "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
     "lodash.debounce": "^4.0.8",

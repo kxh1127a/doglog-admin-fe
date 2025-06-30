@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '@/styles/Nav.module.scss';
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -12,14 +12,33 @@ const menuItems = [
     { href: "/admin/member", label: "Member", icon: <FaUserAlt />, isImplemented: true },
     { href: "/admin/pet", label: "Pet", icon: <MdOutlinePets />, isImplemented: true },
     { href: "/admin/qna", label: "QnA", icon: <IoChatboxEllipses />, isImplemented: true },
-    { href: "/calendar", label: "Calendar", icon: <FaCalendarAlt />, isImplemented: false }, // 비활성
-    { href: "/content", label: "Content", icon: <MdOutlineArticle />, isImplemented: false }, // 비활성
-    { href: "/notice", label: "Notice", icon: <FaBell />, isImplemented: false }, // 비활성
-
+    { href: "/calendar", label: "Calendar", icon: <FaCalendarAlt />, isImplemented: false },
+    { href: "/content", label: "Content", icon: <MdOutlineArticle />, isImplemented: false },
+    { href: "/notice", label: "Notice", icon: <FaBell />, isImplemented: false },
 ];
 
 const Nav = () => {
     const router = useRouter();
+    const [user, setUser] = useState<{ username: string } | null>(null);
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const res = await fetch('/api/me');
+                const data = await res.json();
+                setUser(data.user);
+            } catch (err) {
+                console.error('유저 정보 가져오기 실패', err);
+            }
+        };
+
+        fetchUser();
+    }, []);
+
+    const handleLogout = async () => {
+        await fetch('/api/logout');
+        router.push('/admin/login');
+    };
 
     return (
         <div className={styles.nav}>
@@ -53,6 +72,18 @@ const Nav = () => {
                     );
                 })}
             </ul>
+
+            {/* 로그인 상태 하단에 표시 */}
+            <div className={styles.loginInfo}>
+                {user ? (
+                    <>
+                        <p><strong>{user.username}</strong> 님, 반갑습니다.</p>
+                        <button onClick={handleLogout}>로그아웃하기</button>
+                    </>
+                ) : (
+                    <Link href="/admin/login">로그인하기</Link>
+                )}
+            </div>
 
             <div className={styles.menubar}>
                 <HiBars3 />

@@ -101,4 +101,30 @@
       display: block;
     }
   }
+
+
+
+
+  .loginInfo {
+    padding: 16px;
+    font-size: 14px;
+    color: white;
+    background-color: #2d3748;
+    border-radius: 8px;
+    margin: 20px;
+
+    button {
+      background: none;
+      border: none;
+      color: #f6ad55;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    a {
+      color: #f6ad55;
+      text-decoration: underline;
+    }
+  }
+
 }
