@@ -27,11 +27,18 @@ const AdminLogin = () => {
             });
 
             if (res.ok) {
-                // 로그인 성공 시 홈이나 원하는 페이지로 이동
-                router.push('/admin/pet');
+                router.push('/');
             } else {
                 const data = await res.json();
-                setError(data.message || 'Login failed');
+                console.log(data);
+                // 코드 값 분기 처리
+                if (data.code === 'USER_NOT_FOUND' || data.code === 'INVALID_PASSWORD') {
+                    setError('아이디 또는 비밀번호가 잘못 되었습니다. 정확히 입력해 주세요.');
+                } else if (data.code === 'UNAUTHORIZED_ROLE') {
+                    setError('관리자 권한이 없습니다. 관리자 계정으로 로그인해 주세요.');
+                } else {
+                    setError(data.message || '로그인에 실패했습니다.');
+                }
             }
         } catch (err) {
             console.error(err);
@@ -66,7 +73,7 @@ const AdminLogin = () => {
                         />
                         <button type="submit">관리자 로그인</button>
                     </form>
-                    {error && <p style={{ color: 'red' }}>{error}</p>}
+                    <p className={styles.errMsg} style={{ color: 'red' }}>{error}</p>
                 </div>
             </div>
         </div>

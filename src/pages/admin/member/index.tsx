@@ -11,6 +11,7 @@ import {MdAdminPanelSettings} from "react-icons/md";
 import {useRouter} from "next/router";
 import {User} from "@/types/memberType";
 import AdminLayout from "@/components/AdminLayout";
+import Cookies from "js-cookie";
 
 
 const Index = () => {
@@ -37,6 +38,8 @@ const Index = () => {
 
 
     const fetchUsers = async (page: number, size: number, sortBy: string, direction: string, filter: string) => {
+        // const token = Cookies.get('token');
+        // console.log('token 확인', token);
         const url = `http://localhost:8089/member/api?page=${page}&size=${size}&sortBy=${sortBy}&direction=${direction}&filter=${filter}`;
         // if (filter && filter != 'all') {
         //     url += `&filter=${filter}`;
@@ -49,6 +52,7 @@ const Index = () => {
     }
 
     const searchUsers = async (page: number, size: number, option: string, word: string, sortBy: string, direction: string, filter: string) => {
+        // const token = Cookies.get('token');
         const searchUrl = `http://localhost:8089/member/search?${option}=${word}&page=${page}&size=${size}&sortBy=${sortBy}&direction=${direction}&filter=${filter}`;
         console.log(searchUrl);
         const res = await fetch(searchUrl);
@@ -71,6 +75,7 @@ const Index = () => {
         const handler = setTimeout(() => {
             if (searchWord.trim() === "") {
                 fetchUsers(page, 10, sortBy, sortDirection, filter).then(data => {
+                    console.log(data);
                     setUsers(data.data.content);
                     setTotalPages(data.data.totalPages);
                 });

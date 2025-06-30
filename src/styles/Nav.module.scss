@@ -107,23 +107,37 @@
 
   .loginInfo {
     padding: 16px;
-    font-size: 14px;
+    font-size: $font-size-md;
     color: white;
-    background-color: #2d3748;
+    background-color: rgba(170, 170, 170, 0.6);
     border-radius: 8px;
-    margin: 20px;
+    margin: 60px 40px 40px;
+
+    p {
+      margin-bottom: $space-sm;
+    }
+
+    strong {
+      text-decoration: underline;
+      margin-bottom: $space-md;
+    }
 
     button {
       background: none;
       border: none;
       color: #f6ad55;
       cursor: pointer;
-      margin-top: 8px;
+      //margin-top: 8px;
+      font-size: $font-size-xs;
     }
 
-    a {
+    .loginLink {
+      background: none;
+      border: none;
       color: #f6ad55;
-      text-decoration: underline;
+      cursor: pointer;
+      //margin-top: 8px;
+      font-size: $font-size-xs;
     }
   }
 

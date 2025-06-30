@@ -5,6 +5,7 @@ import {TiArrowSortedDown, TiArrowSortedUp} from "react-icons/ti";
 import {GrStatusPlaceholder} from "react-icons/gr";
 import {GrStatusPlaceholderSmall} from "react-icons/gr";
 import {Qna} from "@/types/qnaType";
+import AdminLayout from '@/components/AdminLayout';
 
 const Index = () => {
     const [data, setData] = useState<Qna[]>([]);
@@ -48,80 +49,83 @@ const Index = () => {
     }, [status, page, orderDirection, searchOption, searchWord]);
 
     return (
-        <div className="main-container">
-            <div className={styles.container}>
+        <AdminLayout>
+            <div className="main-container">
+                <div className={styles.container}>
 
-                <div className={styles.upperBox}>
-                    <div className={styles.title}><h4>유저 1:1 문의내역</h4></div>
+                    <div className={styles.upperBox}>
+                        <div className={styles.title}><h4>유저 1:1 문의내역</h4></div>
 
-                    {/*검색 container*/}
-                    <div className={styles.search_container}>
-                        <div className={styles.select_box}>
-                            <select onChange={(e) => setSearchOption(e.target.value)}>
-                                <option value="byTitle">제목</option>
-                                <option value="byWriter">작성자</option>
-                            </select>
+                        {/*검색 container*/}
+                        <div className={styles.search_container}>
+                            <div className={styles.select_box}>
+                                <select onChange={(e) => setSearchOption(e.target.value)}>
+                                    <option value="byTitle">제목</option>
+                                    <option value="byWriter">작성자</option>
+                                </select>
+                            </div>
+
+                            <input type="text" placeholder="검색어를 입력하세요."
+                                   onChange={(e) => {
+                                       setSearchWord(e.target.value);
+                                       setPage(0);
+                                   }}
+                            />
                         </div>
+                        {/*검색 container*/}
 
-                        <input type="text" placeholder="검색어를 입력하세요."
-                               onChange={(e) => {
-                                   setSearchWord(e.target.value);
-                                   setPage(0);
-                               }}
-                        />
                     </div>
-                    {/*검색 container*/}
 
-                </div>
-
-                <div className={styles.box}>
-                    <table className={styles.table}>
-                        <thead>
-                        <tr>
-                            <th>번호</th>
-                            <th>문의 제목</th>
-                            <th>작성자</th>
-                            <th>
-                                <div className={styles.orderIcon}>등록일
-                                    {
-                                        orderDirection === "desc"
-                                            ? <TiArrowSortedDown
-                                                className={styles.orderBtn}
-                                                onClick={() => {
-                                                    setOrderDirection("asc");
-                                                }}/>
-                                            : <TiArrowSortedUp
-                                                className={styles.orderBtn}
-                                                onClick={() => {
-                                                    setOrderDirection("desc");
-                                                }}/>
-                                    }
-                                </div>
-                            </th>
-                            <th>
-                                <div className={styles.statusIcon}>
-                                    상태
-                                    {
-                                        status == "all"
-                                            ? <GrStatusPlaceholder onClick={() => setStatus("done")}/>
-                                            : (status == "done"
-                                                ? <GrStatusPlaceholderSmall className={styles.statusDone}
-                                                                            onClick={() => setStatus("checking")}/>
-                                                : <GrStatusPlaceholderSmall className={styles.statusChecking}
-                                                                            onClick={() => setStatus("all")}/>)
-                                    }
-                                </div>
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {data.map((item) => (
-                            <tr key={item.id} onClick={()=>{handleClick(item.id)}}>
-                                <td>{item.id}</td>
-                                <td>{item.askTitle}</td>
-                                <td>{item.memberName}</td>
-                                <td>{item.editDate}</td>
-                                <td>
+                    <div className={styles.box}>
+                        <table className={styles.table}>
+                            <thead>
+                            <tr>
+                                <th>번호</th>
+                                <th>문의 제목</th>
+                                <th>작성자</th>
+                                <th>
+                                    <div className={styles.orderIcon}>등록일
+                                        {
+                                            orderDirection === "desc"
+                                                ? <TiArrowSortedDown
+                                                    className={styles.orderBtn}
+                                                    onClick={() => {
+                                                        setOrderDirection("asc");
+                                                    }}/>
+                                                : <TiArrowSortedUp
+                                                    className={styles.orderBtn}
+                                                    onClick={() => {
+                                                        setOrderDirection("desc");
+                                                    }}/>
+                                        }
+                                    </div>
+                                </th>
+                                <th>
+                                    <div className={styles.statusIcon}>
+                                        상태
+                                        {
+                                            status == "all"
+                                                ? <GrStatusPlaceholder onClick={() => setStatus("done")}/>
+                                                : (status == "done"
+                                                    ? <GrStatusPlaceholderSmall className={styles.statusDone}
+                                                                                onClick={() => setStatus("checking")}/>
+                                                    : <GrStatusPlaceholderSmall className={styles.statusChecking}
+                                                                                onClick={() => setStatus("all")}/>)
+                                        }
+                                    </div>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {data.map((item) => (
+                                <tr key={item.id} onClick={() => {
+                                    handleClick(item.id)
+                                }}>
+                                    <td>{item.id}</td>
+                                    <td>{item.askTitle}</td>
+                                    <td>{item.memberName}</td>
+                                    <td>{item.editDate}</td>
+                                    <td>
                   <span
                       className={
                           item.isAnswer
@@ -129,41 +133,42 @@ const Index = () => {
                               : styles.statusPending
                       }
                   >
-                    {item.isAnswer? "답변완료" : "확인중"}
+                    {item.isAnswer ? "답변완료" : "확인중"}
                   </span>
-                                </td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>
+                                    </td>
+                                </tr>
+                            ))}
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                    {/*하단 페이징 버튼 container*/}
+                    <div className={styles.paging_button_container}>
+                        <button onClick={() => setPage(page - 1)} disabled={page <= 0}>
+                            &lt;
+                        </button>
+                        {
+                            [...Array(totalPages)].map((_, i) => (
+                                <button
+                                    key={i}
+                                    className={i === page ? styles.active_page : ''}
+                                    onClick={() => setPage(i)}
+                                >
+                                    {i + 1}
+                                </button>
+                            ))
+                        }
+                        {/*<span>{page + 1}</span><span>/</span><span>{totalPages}</span>*/}
+                        <button onClick={() => setPage(page + 1)} disabled={page + 1 >= totalPages}>
+                            &gt;
+                        </button>
+                    </div>
+                    {/*하단 페이징 버튼 container*/}
+
                 </div>
-
-
-                {/*하단 페이징 버튼 container*/}
-                <div className={styles.paging_button_container}>
-                    <button onClick={() => setPage(page - 1)} disabled={page <= 0}>
-                        &lt;
-                    </button>
-                    {
-                        [...Array(totalPages)].map((_, i) => (
-                            <button
-                                key={i}
-                                className={i === page ? styles.active_page : ''}
-                                onClick={() => setPage(i)}
-                            >
-                                {i + 1}
-                            </button>
-                        ))
-                    }
-                    {/*<span>{page + 1}</span><span>/</span><span>{totalPages}</span>*/}
-                    <button onClick={() => setPage(page + 1)} disabled={page + 1 >= totalPages}>
-                        &gt;
-                    </button>
-                </div>
-                {/*하단 페이징 버튼 container*/}
-
             </div>
-        </div>
+        </AdminLayout>
     );
 };
 

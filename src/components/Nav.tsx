@@ -24,20 +24,45 @@ const Nav = () => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const res = await fetch('/api/me');
+                const res = await fetch('/api/me', {
+                    credentials: 'include',
+                });
                 const data = await res.json();
                 setUser(data.user);
+                console.log("현재 접속 유저 정보");
+                console.log(data.user);
             } catch (err) {
                 console.error('유저 정보 가져오기 실패', err);
             }
         };
 
         fetchUser();
-    }, []);
+        // 라우트가 변경될 때마다 다시 fetchUser 실행
+        router.events.on('routeChangeComplete', fetchUser);
+
+        // cleanup - 컴포넌트 언마운트 시 이벤트 제거
+        return () => {
+            router.events.off('routeChangeComplete', fetchUser);
+        };
+    }, [router.events]);
+
 
     const handleLogout = async () => {
-        await fetch('/api/logout');
-        router.push('/admin/login');
+        try {
+            const res = await fetch('/api/logout', {
+                credentials: 'include', // 꼭 추가해야 쿠키가 같이 전달되고 삭제됨
+            });
+
+            if (res.ok) {
+                router.push('/');
+            } else {
+                console.error('로그아웃 실패:', await res.text());
+                alert('로그아웃에 실패했습니다.');
+            }
+        } catch (err) {
+            console.error('로그아웃 중 오류 발생:', err);
+            alert('로그아웃 중 오류가 발생했습니다.');
+        }
     };
 
     return (
@@ -81,7 +106,10 @@ const Nav = () => {
                         <button onClick={handleLogout}>로그아웃하기</button>
                     </>
                 ) : (
-                    <Link href="/admin/login">로그인하기</Link>
+                    <>
+                    <p className={styles.noInfo}> 로그인 정보가 없습니다.</p>
+                    <Link className={styles.loginLink} href="/admin/login">로그인하기</Link>
+                    </>
                 )}
             </div>
 
