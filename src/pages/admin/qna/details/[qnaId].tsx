@@ -22,7 +22,7 @@ const QnaDetailPage = () => {
         // 🔜 여기에 저장 API 연동 가능
         // await fetch('/api/save-answer', { method: 'POST', body: JSON.stringify(answerText) });
         try {
-            const res = await fetch('http://localhost:8089/qna/details/answer', {
+            const res = await fetch(`http://localhost:8089/qna/answer`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -35,8 +35,9 @@ const QnaDetailPage = () => {
 
             if (!res.ok) throw new Error("등록 실패");
 
-            const result = await res.text(); // 또는 res.json()
-            console.log(result); // '답변이 등록되었습니다.'
+            const result = await res.json(); // 또는 res.json()
+            console.log(result.data); // '답변이 등록되었습니다.'
+            setData(result.data);
 
             setSavedAnswer(answerText);
             setIsEditing(false);
