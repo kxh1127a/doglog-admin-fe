@@ -1,0 +1,77 @@
+@use '@/styles/_variables' as *;
+
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  //min-height: 150vh;
+  height: 70vh;
+  //background: ;
+}
+
+.loginBox {
+  background: rgba(255, 255, 255, 0.50);
+  padding: 2.5rem 3rem;
+  border-radius: 16px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  max-width: 450px;
+  width: 100%;
+}
+
+.iconText {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+
+  .icon {
+    font-size: 1.8rem;
+    color: #3d4b59;
+    margin-right: 0.75rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    margin: 0 0 0.3rem 0;
+    font-weight: bold;
+  }
+
+  p {
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.4;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+
+  input {
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 0.95rem;
+  }
+
+  button {
+    padding: 0.75rem;
+    background-color: $color-primary;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #16202a;
+    }
+  }
+}
+
+.errMsg {
+  color: #ec4040;
+  font-size: $font-size-sm;
+  margin: $space-sm 0 $space-md 0;
+}

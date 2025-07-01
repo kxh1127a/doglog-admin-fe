@@ -1,0 +1,178 @@
+@use '@/styles/_variables' as *;
+
+.dashboard {
+  min-height: 100vh;
+  //background-color: #f5f7fa;
+  padding: 20px;
+
+  .container {
+    //max-width: 1500px;
+    margin: auto;
+    width: 98%;
+  }
+
+  .statsRow {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+
+    .statsCard {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+      }
+    }
+  }
+
+  .mainContent {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+
+    @media (max-width: 1024px) {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+  }
+
+  .leftColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    .chartWidget {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      padding: 24px;
+      min-height: 320px;
+    }
+
+    .todoWidget {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      padding: 24px;
+      min-height: 280px;
+    }
+  }
+
+  .rightColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .donutChart {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      padding: 20px;
+      min-height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .notificationPanel {
+      background: $color-primary;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      padding: 5px;
+      min-height: 70px;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 45%;
+        transform: translate(-50%, -50%);
+        width: 70px;
+        height: 70px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    .calendar {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      padding: 20px;
+      min-height: 320px;
+    }
+  }
+
+  // 반응형 디자인
+  @media (max-width: 768px) {
+    padding: 16px;
+
+    .statsRow {
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .mainContent {
+      gap: 16px;
+    }
+
+    .leftColumn {
+      gap: 16px;
+
+      .chartWidget,
+      .todoWidget {
+        padding: 20px;
+      }
+    }
+
+    .rightColumn {
+      gap: 12px;
+
+      .donutChart,
+      .notificationPanel,
+      .calendar {
+        padding: 16px;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 12px;
+
+    .leftColumn {
+      .chartWidget,
+      .todoWidget {
+        padding: 16px;
+        min-height: auto;
+      }
+    }
+
+    .rightColumn {
+      .donutChart {
+        min-height: 180px;
+      }
+
+      .notificationPanel {
+        min-height: 100px;
+      }
+
+      .calendar {
+        min-height: 280px;
+      }
+    }
+  }
+}

@@ -3,8 +3,7 @@ import React, {useEffect, useState} from 'react';
 import styles from '@/styles/QnaDetails.module.scss';
 import {RiArrowGoBackLine} from "react-icons/ri";
 import {QnaDetailResponse} from '@/types/qnaDetailsType';
-import {FiEdit3} from "react-icons/fi"; // ✨ edit 아이콘
-import {FaSave} from "react-icons/fa"; // ✨ 저장 아이콘 (선택)
+import {FiEdit3} from "react-icons/fi";
 
 const QnaDetailPage = () => {
 

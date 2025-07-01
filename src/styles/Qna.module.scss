@@ -21,7 +21,7 @@
   border-radius: 20px;
   padding: 40px;
   max-width: 1500px;
-  margin: 0 auto;
+  margin: $space-md auto 0 auto;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
@@ -141,7 +141,7 @@
 
 /////////////////// 하단 페이징 버튼 container
 .paging_button_container {
-  margin-top: $space-xl;
+  margin-top: $space-lg;
   display: flex;
   justify-content: center;
   align-items: center;

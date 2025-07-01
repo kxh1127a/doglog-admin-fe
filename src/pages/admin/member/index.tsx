@@ -10,6 +10,8 @@ import {FaUserSlash} from "react-icons/fa";
 import {MdAdminPanelSettings} from "react-icons/md";
 import {useRouter} from "next/router";
 import {User} from "@/types/memberType";
+import AdminLayout from "@/components/AdminLayout";
+import Cookies from "js-cookie";
 
 
 const Index = () => {
@@ -36,6 +38,8 @@ const Index = () => {
 
 
     const fetchUsers = async (page: number, size: number, sortBy: string, direction: string, filter: string) => {
+        // const token = Cookies.get('token');
+        // console.log('token 확인', token);
         const url = `http://localhost:8089/member/api?page=${page}&size=${size}&sortBy=${sortBy}&direction=${direction}&filter=${filter}`;
         // if (filter && filter != 'all') {
         //     url += `&filter=${filter}`;
@@ -48,6 +52,7 @@ const Index = () => {
     }
 
     const searchUsers = async (page: number, size: number, option: string, word: string, sortBy: string, direction: string, filter: string) => {
+        // const token = Cookies.get('token');
         const searchUrl = `http://localhost:8089/member/search?${option}=${word}&page=${page}&size=${size}&sortBy=${sortBy}&direction=${direction}&filter=${filter}`;
         console.log(searchUrl);
         const res = await fetch(searchUrl);
@@ -70,6 +75,7 @@ const Index = () => {
         const handler = setTimeout(() => {
             if (searchWord.trim() === "") {
                 fetchUsers(page, 10, sortBy, sortDirection, filter).then(data => {
+                    console.log(data);
                     setUsers(data.data.content);
                     setTotalPages(data.data.totalPages);
                 });
@@ -89,158 +95,164 @@ const Index = () => {
 
 
     return (
-        <div className="main-container">
+        <AdminLayout>
+            <div className="main-container">
 
-            <article className={styles.article_container}>
-                <section className={styles.upper_section}>
+                <article className={styles.article_container}>
+                    <section className={styles.upper_section}>
 
-                    {/*sorting button*/}
-                    <div className={styles.user_status_btn_container}>
-                        <button className={filter == "all" ? styles.active_status : ''} onClick={() => {
-                            setFilter("all");
-                            setPage(0);
-                        }}><MdFace/> 전체회원
-                        </button>
-                        <button className={filter == "normal" ? styles.active_status : ''} onClick={() => {
-                            setFilter("normal");
-                            setPage(0);
-                        }}><MdOutlineFaceRetouchingNatural/> 활동회원
-                        </button>
-                        <button className={filter == "withdrawn" ? styles.active_status : ''} onClick={() => {
-                            setFilter("withdrawn");
-                            setPage(0);
-                        }}><MdOutlineFaceRetouchingOff/> 탈퇴회원
-                        </button>
-                    </div>
-                    <div className={styles.search_container}>
-                        <div className={styles.select_box}>
-                            <select onChange={(e) => setSearchOption(e.target.value)}>
-                                <option value="name">이름</option>
-                                <option value="userName">아이디</option>
-                                <option value="email">이메일</option>
-                                <option value="phone">핸드폰번호</option>
-                            </select>
+                        {/*sorting button*/}
+                        <div className={styles.user_status_btn_container}>
+                            <button className={filter == "all" ? styles.active_status : ''} onClick={() => {
+                                setFilter("all");
+                                setPage(0);
+                            }}><MdFace/> 전체회원
+                            </button>
+                            <button className={filter == "normal" ? styles.active_status : ''} onClick={() => {
+                                setFilter("normal");
+                                setPage(0);
+                            }}><MdOutlineFaceRetouchingNatural/> 활동회원
+                            </button>
+                            <button className={filter == "withdrawn" ? styles.active_status : ''} onClick={() => {
+                                setFilter("withdrawn");
+                                setPage(0);
+                            }}><MdOutlineFaceRetouchingOff/> 탈퇴회원
+                            </button>
+                        </div>
+                        <div className={styles.search_container}>
+                            <div className={styles.select_box}>
+                                <select onChange={(e) => setSearchOption(e.target.value)}>
+                                    <option value="name">이름</option>
+                                    <option value="userName">아이디</option>
+                                    <option value="email">이메일</option>
+                                    <option value="phone">핸드폰번호</option>
+                                </select>
+                            </div>
+
+                            <input type="text" placeholder="검색어를 입력하세요."
+                                   onChange={(e) => {
+                                       setSearchWord(e.target.value);
+                                       setPage(0);
+                                   }}
+                                // onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+                            />
                         </div>
 
-                        <input type="text" placeholder="검색어를 입력하세요."
-                               onChange={(e) => {
-                                   setSearchWord(e.target.value);
-                                   setPage(0);
-                               }}
-                            // onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-                        />
-                    </div>
-
-                </section>
-                <section className={styles.lower_section}>
-                    <div className={styles.user_table}>
-                        <div className={`${styles.user_header} ${styles.header}`}>
-                            <div>유저기본정보</div>
-                            <div>전화번호</div>
-                            <div>반려견정보</div>
-                            <div>가입일
-                                {
-                                    isDescendingCreatedAt
-                                        ? <TiArrowSortedDown
-                                            className={`${sortBy == "createdAt" ? styles.active_sort_btn : ''}`}
-                                            onClick={() => {
-                                                setIsDescendingCreatedAt(false);
-                                                setSortBy("createdAt");
-                                                // setPage(0);
-                                                setSortDirection("asc");
-                                            }}/>
-                                        : <TiArrowSortedUp
-                                            className={`${sortBy == "createdAt" ? styles.active_sort_btn : ''}`}
-                                            onClick={() => {
-                                                setIsDescendingCreatedAt(true);
-                                                setSortBy("createdAt");
-                                                // setPage(0);
-                                                setSortDirection("desc");
-                                            }}/>
-                                }
+                    </section>
+                    <section className={styles.lower_section}>
+                        <div className={styles.user_table}>
+                            <div className={`${styles.user_header} ${styles.header}`}>
+                                <div>유저기본정보</div>
+                                <div>전화번호</div>
+                                <div>반려견정보</div>
+                                <div>가입일
+                                    {
+                                        isDescendingCreatedAt
+                                            ? <TiArrowSortedDown
+                                                className={`${sortBy == "createdAt" ? styles.active_sort_btn : ''}`}
+                                                onClick={() => {
+                                                    setIsDescendingCreatedAt(false);
+                                                    setSortBy("createdAt");
+                                                    // setPage(0);
+                                                    setSortDirection("asc");
+                                                }}/>
+                                            : <TiArrowSortedUp
+                                                className={`${sortBy == "createdAt" ? styles.active_sort_btn : ''}`}
+                                                onClick={() => {
+                                                    setIsDescendingCreatedAt(true);
+                                                    setSortBy("createdAt");
+                                                    // setPage(0);
+                                                    setSortDirection("desc");
+                                                }}/>
+                                    }
+                                </div>
+                                <div>마지막접속
+                                    {
+                                        isDescendingLastLoginAt
+                                            ? <TiArrowSortedDown
+                                                className={`${sortBy == "lastLoginAt" ? styles.active_sort_btn : ''}`}
+                                                onClick={() => {
+                                                    setIsDescendingLastLoginAt(false);
+                                                    setSortBy("lastLoginAt");
+                                                    // setPage(0);
+                                                    setSortDirection("desc");
+                                                }}/>
+                                            : <TiArrowSortedUp
+                                                className={`${sortBy == "lastLoginAt" ? styles.active_sort_btn : ''}`}
+                                                onClick={() => {
+                                                    setIsDescendingLastLoginAt(true);
+                                                    setSortBy("lastLoginAt");
+                                                    // setPage(0);
+                                                    setSortDirection("asc");
+                                                }}/>
+                                    }
+                                </div>
                             </div>
-                            <div>마지막접속
-                                {
-                                    isDescendingLastLoginAt
-                                        ? <TiArrowSortedDown
-                                            className={`${sortBy == "lastLoginAt" ? styles.active_sort_btn : ''}`}
-                                            onClick={() => {
-                                                setIsDescendingLastLoginAt(false);
-                                                setSortBy("lastLoginAt");
-                                                // setPage(0);
-                                                setSortDirection("desc");
-                                            }}/>
-                                        : <TiArrowSortedUp
-                                            className={`${sortBy == "lastLoginAt" ? styles.active_sort_btn : ''}`}
-                                            onClick={() => {
-                                                setIsDescendingLastLoginAt(true);
-                                                setSortBy("lastLoginAt");
-                                                // setPage(0);
-                                                setSortDirection("asc");
-                                            }}/>
-                                }
-                            </div>
-                        </div>
 
-                        <div className={styles.user_body}>
-                            {
-                                users.map((user) => (
-                                    <div key={user.id}
-                                         className={`${styles.user_row} ${!user.isEnabled ? styles.user_row_disabled : ''}`}
-                                         onClick={() => {handleClick(user.id)}}>
-                                        <div className={styles.user_info}>
-                                            {/*<img className={`${styles.profile_icon}`}*/}
-                                            {/*     style={{backgroundImage: `url(http://localhost:8089/${user.petProfileImageUrl})`}}/>*/}
-                                            {
-                                                !user.isEnabled ? <FaUserSlash className={styles.user_icon}/> :
-                                                    (
-                                                        user.memberRole === 'ADMIN' ?
-                                                            <MdAdminPanelSettings className={styles.admin_icon}/> :
-                                                            <FaUserCircle className={styles.user_icon}/>
-                                                    )
-                                            }
-                                            <div>
-                                                <div><strong>{user.name} / {user.userName}</strong></div>
-                                                <div className={styles.email}>{user.email}</div>
+                            <div className={styles.user_body}>
+                                {
+                                    users.map((user) => (
+                                        <div key={user.id}
+                                             className={`${styles.user_row} ${!user.isEnabled ? styles.user_row_disabled : ''}`}
+                                             onClick={() => {
+                                                 handleClick(user.id)
+                                             }}>
+                                            <div className={styles.user_info}>
+                                                {/*<img className={`${styles.profile_icon}`}*/}
+                                                {/*     style={{backgroundImage: `url(http://localhost:8089/${user.petProfileImageUrl})`}}/>*/}
+                                                {
+                                                    !user.isEnabled ? <FaUserSlash className={styles.user_icon}/> :
+                                                        (
+                                                            user.memberRole === 'ADMIN' ?
+                                                                <MdAdminPanelSettings className={styles.admin_icon}/> :
+                                                                <FaUserCircle className={styles.user_icon}/>
+                                                        )
+                                                }
+                                                <div>
+                                                    <div><strong>{user.name} / {user.userName}</strong></div>
+                                                    <div className={styles.email}>{user.email}</div>
+                                                </div>
                                             </div>
+                                            <div>{user.phone}</div>
+                                            <div>{
+                                                user.petName == "" ? "미등록" : `${user.petName}(${user.petBirthDate})`
+                                            }</div>
+                                            <div>{user.createdAt}</div>
+                                            <div>{user.lastLoginInfo}</div>
                                         </div>
-                                        <div>{user.phone}</div>
-                                        <div>{user.petName} ({user.petBirthDate})</div>
-                                        <div>{user.createdAt}</div>
-                                        <div>{user.lastLoginInfo}</div>
-                                    </div>
+                                    ))
+                                }
+                            </div>
+                        </div>
+
+                        {/*paging button*/
+                        }
+                        <div className={styles.paging_button_container}>
+                            <button onClick={() => setPage(page - 1)} disabled={page <= 0}>
+                                &lt;
+                            </button>
+
+                            {
+                                [...Array(totalPages)].map((_, i) => (
+                                    <button
+                                        key={i}
+                                        className={i === page ? styles.active_page : ''}
+                                        onClick={() => setPage(i)}
+                                    >
+                                        {i + 1}
+                                    </button>
                                 ))
                             }
+                            {/*<span>{page + 1}</span><span>/</span><span>{totalPages}</span>*/}
+
+                            <button onClick={() => setPage(page + 1)} disabled={page + 1 >= totalPages}>
+                                &gt;
+                            </button>
                         </div>
-                    </div>
-
-                    {/*paging button*/
-                    }
-                    <div className={styles.paging_button_container}>
-                        <button onClick={() => setPage(page - 1)} disabled={page <= 0}>
-                            &lt;
-                        </button>
-
-                        {
-                            [...Array(totalPages)].map((_, i) => (
-                                <button
-                                    key={i}
-                                    className={i === page ? styles.active_page : ''}
-                                    onClick={() => setPage(i)}
-                                >
-                                    {i + 1}
-                                </button>
-                            ))
-                        }
-                        {/*<span>{page + 1}</span><span>/</span><span>{totalPages}</span>*/}
-
-                        <button onClick={() => setPage(page + 1)} disabled={page + 1 >= totalPages}>
-                            &gt;
-                        </button>
-                    </div>
-                </section>
-            </article>
-        </div>
+                    </section>
+                </article>
+            </div>
+        </AdminLayout>
     )
         ;
 };

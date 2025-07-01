@@ -1,0 +1,300 @@
+.donutChart {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1e293b;
+      margin: 0;
+    }
+
+    .controls {
+      .controlButton {
+        width: 28px;
+        height: 28px;
+        border: none;
+        background: #f8fafc;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #64748b;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background: #e2e8f0;
+          color: #475569;
+        }
+      }
+    }
+  }
+
+  .chartContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+
+    .svgContainer {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .svg {
+        transform: rotate(-90deg);
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.05));
+
+        .arc {
+          transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+          animation: drawArc 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+      }
+
+      .centerContent {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        pointer-events: none;
+
+        .mainValue {
+          font-size: 28px;
+          font-weight: 700;
+          color: #1e293b;
+          line-height: 1;
+          display: flex;
+          align-items: baseline;
+          justify-content: center;
+          gap: 2px;
+
+          .totalValue {
+            font-size: 16px;
+            font-weight: 500;
+            color: #64748b;
+          }
+        }
+
+        .centerLabel {
+          font-size: 12px;
+          color: #64748b;
+          margin-top: 4px;
+          font-weight: 500;
+        }
+      }
+    }
+
+    .legend {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+
+      .legendItem {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 0;
+
+        .legendColor {
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          flex-shrink: 0;
+        }
+
+        .legendContent {
+          flex: 1;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .legendLabel {
+            font-size: 14px;
+            color: #475569;
+            font-weight: 500;
+          }
+
+          .legendValues {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+
+            .legendValue {
+              font-size: 14px;
+              font-weight: 600;
+              color: #1e293b;
+            }
+
+            .legendPercentage {
+              font-size: 12px;
+              color: #64748b;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // 애니메이션
+  @keyframes drawArc {
+    from {
+      stroke-dashoffset: 0;
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  // 반응형
+  @media (max-width: 768px) {
+    padding: 16px;
+
+    .header {
+      margin-bottom: 16px;
+
+      .title {
+        font-size: 15px;
+      }
+    }
+
+    .chartContainer {
+      gap: 12px;
+
+      .svgContainer {
+        .centerContent {
+          .mainValue {
+            font-size: 24px;
+
+            .totalValue {
+              font-size: 14px;
+            }
+          }
+
+          .centerLabel {
+            font-size: 11px;
+          }
+        }
+      }
+
+      .legend {
+        gap: 6px;
+
+        .legendItem {
+          padding: 6px 0;
+
+          .legendColor {
+            width: 10px;
+            height: 10px;
+          }
+
+          .legendContent {
+            .legendLabel {
+              font-size: 13px;
+            }
+
+            .legendValues {
+              .legendValue {
+                font-size: 13px;
+              }
+
+              .legendPercentage {
+                font-size: 11px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 14px;
+
+    .chartContainer {
+      .svgContainer {
+        .centerContent {
+          .mainValue {
+            font-size: 20px;
+
+            .totalValue {
+              font-size: 12px;
+            }
+          }
+        }
+      }
+
+      .legend {
+        .legendItem {
+          .legendContent {
+            .legendLabel {
+              font-size: 12px;
+            }
+
+            .legendValues {
+              .legendValue {
+                font-size: 12px;
+              }
+
+              .legendPercentage {
+                font-size: 10px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // 호버 효과
+  &:hover {
+    .svgContainer .svg .arc {
+      filter: opacity(0.5);
+    }
+  }
+
+  // 다크 모드 대응
+  @media (prefers-color-scheme: dark) {
+    background: #1e293b;
+
+    .header .title {
+      color: #f1f5f9;
+    }
+
+    .chartContainer {
+      .svgContainer .centerContent {
+        .mainValue {
+          color: #f1f5f9;
+        }
+      }
+
+      .legend .legendItem .legendContent {
+        .legendLabel {
+          color: #cbd5e1;
+        }
+
+        .legendValues .legendValue {
+          color: #f1f5f9;
+        }
+      }
+    }
+  }
+}
