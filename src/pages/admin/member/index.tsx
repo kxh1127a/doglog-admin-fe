@@ -214,7 +214,9 @@ const Index = () => {
                                                 </div>
                                             </div>
                                             <div>{user.phone}</div>
-                                            <div>{user.petName} ({user.petBirthDate})</div>
+                                            <div>{
+                                                user.petName == "" ? "미등록" : `${user.petName}(${user.petBirthDate})`
+                                            }</div>
                                             <div>{user.createdAt}</div>
                                             <div>{user.lastLoginInfo}</div>
                                         </div>

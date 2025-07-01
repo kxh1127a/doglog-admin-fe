@@ -106,7 +106,7 @@
 
 
   .loginInfo {
-    padding: 16px;
+    padding: $space-md $space-md $space-md $space-lg;
     font-size: $font-size-md;
     color: white;
     background-color: rgba(170, 170, 170, 0.6);
@@ -120,6 +120,7 @@
     strong {
       text-decoration: underline;
       margin-bottom: $space-md;
+      font-size: $font-size-lg;
     }
 
     button {

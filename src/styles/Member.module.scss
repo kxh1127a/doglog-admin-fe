@@ -108,13 +108,13 @@ div {
       height: 100vh;
 
       .user_table {
-        margin-top: $space-md;
+        margin-top: $space-sm;
       }
 
       .user_body {
         border-radius: $radius-lg;
         overflow: hidden;
-        margin-top: $space-lg;
+        margin-top: $space-md;
       }
 
       .user_row, .user_header {
@@ -245,7 +245,7 @@ div {
       }
 
       .paging_button_container {
-        margin-top: $space-xl;
+        margin-top: $space-lg;
         display: flex;
         justify-content: center;
         align-items: center;
