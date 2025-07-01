@@ -27,7 +27,7 @@ const AdminLogin = () => {
             });
 
             if (res.ok) {
-                router.push('/');
+                router.push('/admin/dashboard');
             } else {
                 const data = await res.json();
                 console.log(data);

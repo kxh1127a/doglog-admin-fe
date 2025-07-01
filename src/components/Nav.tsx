@@ -8,7 +8,7 @@ import { IoChatboxEllipses } from "react-icons/io5";
 import { HiBars3 } from "react-icons/hi2";
 
 const menuItems = [
-    { href: "/", label: "Dashboard", icon: <FaHome />, isImplemented: true },
+    { href: "/admin/dashboard", label: "Dashboard", icon: <FaHome />, isImplemented: true },
     { href: "/admin/member", label: "Member", icon: <FaUserAlt />, isImplemented: true },
     { href: "/admin/pet", label: "Pet", icon: <MdOutlinePets />, isImplemented: true },
     { href: "/admin/qna", label: "QnA", icon: <IoChatboxEllipses />, isImplemented: true },
@@ -54,7 +54,7 @@ const Nav = () => {
             });
 
             if (res.ok) {
-                router.push('/');
+                router.push('/admin/login');
             } else {
                 console.error('로그아웃 실패:', await res.text());
                 alert('로그아웃에 실패했습니다.');
@@ -68,7 +68,7 @@ const Nav = () => {
     return (
         <div className={styles.nav}>
             <h1 className={styles.logo}>
-                <Link href="/">
+                <Link href="/admin">
                     <img src="/logo.png" alt="doglog logo" />
                 </Link>
             </h1>
